@@ -1,0 +1,104 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.darkModeToggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1;
+}
+
+.darkModeToggle button {
+  padding: 5px;
+}
+
+section {
+  width: 100%;
+  height: 70vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  grid-gap: 10px;
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  grid-gap: 5px;
+}
+
+.darkMode {
+  -webkit-filter: invert(1);
+          filter: invert(1);
+  background: black;
+  color: white;
+}
+
+.darkMode .userMessage, .darkMode .faveNumber {
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+.buttonContainer {
+  width: 20%;
+  grid-gap: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.activeUser .buttonContainer {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.registrationButton {
+  width: 100%;
+}
+
+input[type="number"] {
+  width: 50px;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  opacity: 1;
+}
+/*# sourceMappingURL=style.css.map */

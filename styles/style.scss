@@ -1,0 +1,68 @@
+*,*::before,*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    display: flex;
+    position: relative;
+}
+
+.darkModeToggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1;
+    button {
+        padding: 5px;
+    }
+}
+
+section {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    grid-gap: 10px;
+    transform: scale(1.5);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 5px;
+}
+
+.darkMode {
+    filter: invert(1);
+    background: black;
+    color: white;
+    .userMessage, .faveNumber {
+        filter: invert(1);
+    }
+}
+
+.buttonContainer {
+    width: 20%;
+    grid-gap: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.activeUser .buttonContainer {flex-direction: column;}
+
+.registrationButton { width: 100%;}
+
+input[type="number"] {
+    width: 50px;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+    opacity: 1;
+}
