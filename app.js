@@ -7,6 +7,7 @@ const faveNumber = document.querySelector(`.faveNumber`);
 const userMessage = document.querySelector(`.userMessage`);
 const signInButton = document.querySelector(`.signInButton`);
 const signOutButton = document.querySelector(`.signOutButton`);
+const slidingBanner = document.querySelector(`.slidingBanner`);
 const signUpButton = document.querySelector(`.signUpButton`);
 const delAccButton = document.querySelector(`.delAccButton`);
 const emailInput = document.querySelector(`input[type="email"]`);
@@ -17,7 +18,13 @@ const userInputs = document.querySelectorAll(`.userInput`);
 
 // User Initiation
 console.log(`Users`, users);
-if (!users.length) signInButton.remove();
+if (!users.length) {
+    signInButton.remove();
+} else {
+    users.forEach(usr => {
+        slidingBanner.innerHTML = `${slidingBanner.innerHTML} --------------------------- ${usr.username ? usr.username : usr.email}'s Favorite Number: ${usr.number}`;
+    })
+};
 
 if (user) {
     console.log(`Current User`, user);
@@ -25,8 +32,8 @@ if (user) {
     signInButton.remove();
     signUpButton.remove();
     passwordInput.remove();
-    document.body.classList.add(`activeUser`);
     userHello.innerHTML = user.email;
+    document.body.classList.add(`activeUser`);
     userInputs.forEach(input => input.value = user[input.id] || ``);
     if (user[`username`]) userHello.innerHTML = user[`username`];
 } else {

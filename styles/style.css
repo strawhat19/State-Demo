@@ -5,12 +5,32 @@
           box-sizing: border-box;
 }
 
+:root {
+  --transition: 300ms ease-in-out;
+}
+
 body {
-  overflow-x: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  overflow-x: hidden;
   position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.darkMode {
+  -webkit-filter: invert(1);
+          filter: invert(1);
+  background: black;
+  color: white;
+}
+
+.darkMode .userMessage, .darkMode .faveNumber, .darkMode .slidingBanner {
+  -webkit-filter: invert(1);
+          filter: invert(1);
 }
 
 .darkModeToggle {
@@ -47,6 +67,10 @@ section {
           transform: scale(1.5);
 }
 
+.slidingBanner {
+  bottom: 0px;
+}
+
 form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -61,18 +85,6 @@ form {
 
 form input[type="text"] {
   padding: 0.5em;
-}
-
-.darkMode {
-  -webkit-filter: invert(1);
-          filter: invert(1);
-  background: black;
-  color: white;
-}
-
-.darkMode .userMessage, .darkMode .faveNumber {
-  -webkit-filter: invert(1);
-          filter: invert(1);
 }
 
 .buttonContainer {

@@ -4,10 +4,24 @@
     box-sizing: border-box;
 }
 
+:root {
+    --transition: 300ms ease-in-out;
+}
+
 body {
-    overflow-x: hidden;
     display: flex;
+    overflow-x: hidden;
     position: relative;
+    flex-direction: column;
+}
+
+.darkMode {
+    filter: invert(1);
+    background: black;
+    color: white;
+    .userMessage, .faveNumber, .slidingBanner {
+        filter: invert(1);
+    }
 }
 
 .darkModeToggle {
@@ -33,6 +47,10 @@ section {
     transform: scale(1.5);
 }
 
+.slidingBanner {
+    bottom: 0px;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -40,15 +58,6 @@ form {
     padding: 1em;
     input[type="text"] {
         padding: 0.5em;
-    }
-}
-
-.darkMode {
-    filter: invert(1);
-    background: black;
-    color: white;
-    .userMessage, .faveNumber {
-        filter: invert(1);
     }
 }
 
