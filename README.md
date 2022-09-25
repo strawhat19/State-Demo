@@ -4,6 +4,8 @@
 
 A Demo Project that covers HTML, CSS, SASS, JS, TS, PHP & jQuery in a Fun Way.
 
+![Screenshot of Application](./assets/images/Advanced-Concepts.gif)
+
 ![Screenshot of Application](https://raw.githubusercontent.com/strawhat19/State-Demo/main/assets/images/StateDemo.jpg)
 
 ## Table of Contents  
