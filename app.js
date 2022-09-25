@@ -13,13 +13,19 @@ const darkModeToggleButton = document.querySelector(`.dModeToggle`);
 const passwordInput = document.querySelector(`input[type="password"]`);
 const numberInput = document.querySelector(`input[type="number"]`);
 
-function uuidv4() {
-    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    );
-};
+// userDataForm.remove();
 
-userDataForm.remove();
+if (localStorage.getItem(`Dark Mode`) == true) {
+    console.log(`Dark Mode`);
+    document.body.classList.add(`darkMode`);
+    // localStorage.setItem(`Dark Mode`, true);
+    // darkModeToggleButton.innerHTML = `Light Mode`;
+} else {
+    console.log(`Light Mode`);
+    document.body.classList.remove(`darkMode`);
+    // localStorage.setItem(`Dark Mode`, false);
+    // darkModeToggleButton.innerHTML = `Dark Mode`;
+}
 
 if (user) {
     console.log(user);
@@ -34,7 +40,7 @@ if (user) {
     faveNumber.remove();
     numberInput.remove();
     userMessage.remove();
-    // userDataForm.remove();
+    userDataForm.remove();
     delAccButton.remove();
     signOutButton.remove();
 }
@@ -101,23 +107,30 @@ delAccButton.addEventListener(`click`, event => {
 userDataForm.addEventListener(`change`, event => {
     event.preventDefault();
     console.log(event);
-    console.log(userDataForm);
+    // console.log(userDataForm);
     let userFormData = new FormData(userDataForm);
     console.log(`userFormData`, userFormData);
-    console.log(event.target.id, event.target.value);
+    // console.log(event.target.id, event.target.value);
     let userWithData = {
         ...user,
         [event.target.id]: event.target.value,
     };
-    console.log(userWithData);
+    // console.log(userWithData);
+});
+
+userDataForm.addEventListener(`submit`, event => {
+    event.preventDefault();
+    console.log(`User Data Form Submitted`, event);
 });
 
 darkModeToggleButton.addEventListener(`click`, event => {
-    console.log(`Dark Mode Toggle Button Clicked`, event);
     document.body.classList.toggle(`darkMode`);
-    if (document.body.classList.contains(`darkMode`)) {
-        darkModeToggleButton.innerHTML = `Light Mode`;
-    } else {
-        darkModeToggleButton.innerHTML = `Dark Mode`;
-    }
-})
+    // if (document.body.classList.contains(`darkMode`)) {
+    //     localStorage.setItem(`Dark Mode`, true);
+    //     darkModeToggleButton.innerHTML = `Light Mode`;
+    // } else {
+    //     localStorage.setItem(`Dark Mode`, false);
+    //     darkModeToggleButton.innerHTML = `Dark Mode`;
+    // }
+    console.log(`Dark Mode`, localStorage.getItem(`Dark Mode`));
+});
