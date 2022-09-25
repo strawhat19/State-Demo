@@ -12,20 +12,7 @@ const emailInput = document.querySelector(`input[type="email"]`);
 const darkModeToggleButton = document.querySelector(`.dModeToggle`);
 const passwordInput = document.querySelector(`input[type="password"]`);
 const numberInput = document.querySelector(`input[type="number"]`);
-
-// userDataForm.remove();
-
-if (localStorage.getItem(`Dark Mode`) == true) {
-    console.log(`Dark Mode`);
-    document.body.classList.add(`darkMode`);
-    // localStorage.setItem(`Dark Mode`, true);
-    // darkModeToggleButton.innerHTML = `Light Mode`;
-} else {
-    console.log(`Light Mode`);
-    document.body.classList.remove(`darkMode`);
-    // localStorage.setItem(`Dark Mode`, false);
-    // darkModeToggleButton.innerHTML = `Dark Mode`;
-}
+const darkMode = JSON.parse(localStorage.getItem(`Dark Mode`)) || false;
 
 if (user) {
     console.log(user);
@@ -50,6 +37,29 @@ console.log(`Users`, users);
 console.log(`-----------------------`);
 users.forEach(usr => console.log(usr));
 console.log(`-----------------------`);
+
+function darkModeToggle() {
+    if (darkMode == true) {
+        document.body.classList.add(`darkMode`);
+        localStorage.setItem(`Dark Mode`, true);
+        darkModeToggleButton.innerHTML = `Light Mode`;
+    } else if (darkMode == false) {
+        document.body.classList.remove(`darkMode`);
+        localStorage.setItem(`Dark Mode`, false);
+        darkModeToggleButton.innerHTML = `Dark Mode`;
+    }
+    
+    darkModeToggleButton.addEventListener(`click`, event => {
+        document.body.classList.toggle(`darkMode`);
+        if (document.body.classList.contains(`darkMode`)) {
+            localStorage.setItem(`Dark Mode`, true);
+            darkModeToggleButton.innerHTML = `Light Mode`;
+        } else {
+            localStorage.setItem(`Dark Mode`, false);
+            darkModeToggleButton.innerHTML = `Dark Mode`;
+        }
+    });
+}
 
 signUpButton.addEventListener(`click`, event => {
 
@@ -123,14 +133,4 @@ userDataForm.addEventListener(`submit`, event => {
     console.log(`User Data Form Submitted`, event);
 });
 
-darkModeToggleButton.addEventListener(`click`, event => {
-    document.body.classList.toggle(`darkMode`);
-    // if (document.body.classList.contains(`darkMode`)) {
-    //     localStorage.setItem(`Dark Mode`, true);
-    //     darkModeToggleButton.innerHTML = `Light Mode`;
-    // } else {
-    //     localStorage.setItem(`Dark Mode`, false);
-    //     darkModeToggleButton.innerHTML = `Dark Mode`;
-    // }
-    console.log(`Dark Mode`, localStorage.getItem(`Dark Mode`));
-});
+darkModeToggle();
