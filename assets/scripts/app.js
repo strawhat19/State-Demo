@@ -17,16 +17,7 @@ const passwordInput = document.querySelector(`input[type="password"]`);
 const darkMode = JSON.parse(localStorage.getItem(`Dark Mode`)) || false;
 const userInputs = document.querySelectorAll(`.userInput`);
 
-// User Initiation
-if (!users.length) {
-    signInButton.remove();
-} else {
-    users.forEach(usr => {
-        slidingBanner.innerHTML = `${slidingBanner.innerHTML} ----- ${usr.username ? usr.username : usr.email}, the ${usr.bio}, is ${usr.status}.`;
-        slidingBanner.title = `${slidingBanner.title} ----- ${usr.username ? usr.username : usr.email}'s Favorite Number: ${usr.number}`;
-    });
-};
-
+// If There Is a Currently Logged In User
 if (user) {
     console.log(`Current User`, user);
     emailInput.remove();
@@ -46,6 +37,16 @@ if (user) {
     userInputs.forEach(input => input.remove());
     console.log(`Users`, users);
 }
+
+// If There Are No Users
+if (!users.length) {
+    signInButton.remove();
+} else {
+    users.forEach(usr => {
+        slidingBanner.innerHTML = `${slidingBanner.innerHTML} ----- ${usr.username ? usr.username : usr.email}, the ${usr.bio}, is ${usr.status}.`;
+        slidingBanner.title = `${slidingBanner.title} ----- ${usr.username ? usr.username : usr.email}'s Favorite Number: ${usr.number}`;
+    });
+};
 
 // Dark Mode
 if (darkMode == true) {
