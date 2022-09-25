@@ -1,6 +1,5 @@
 import { globalFunctions } from "./globalFunctions.js";
 
-const userDataForm = document.forms.userData;
 const userHello = document.querySelector(`.userHello`);
 const user = JSON.parse(localStorage.getItem(`User`));
 const users = globalFunctions.removeDuplicateObjectFromArray(JSON.parse(localStorage.getItem(`Users`))) || [];
@@ -13,67 +12,60 @@ const delAccButton = document.querySelector(`.delAccButton`);
 const emailInput = document.querySelector(`input[type="email"]`);
 const darkModeToggleButton = document.querySelector(`.dModeToggle`);
 const passwordInput = document.querySelector(`input[type="password"]`);
-const numberInput = document.querySelector(`input[type="number"]`);
 const darkMode = JSON.parse(localStorage.getItem(`Dark Mode`)) || false;
-const userInputs = userDataForm.querySelectorAll(`input[type="text"]`);
+const userInputs = document.querySelectorAll(`.userInput`);
+
+// User Initiation
+console.log(`Users`, users);
+if (!users.length) signInButton.remove();
 
 if (user) {
-    console.log(user);
+    console.log(`Current User`, user);
     emailInput.remove();
     signInButton.remove();
     signUpButton.remove();
     passwordInput.remove();
     document.body.classList.add(`activeUser`);
-    numberInput.value = user.number || 0;
     userHello.innerHTML = user.email;
-    userInputs.forEach(input => input.value = user[input.id]);
+    userInputs.forEach(input => input.value = user[input.id] || ``);
+    if (user[`username`]) userHello.innerHTML = user[`username`];
 } else {
     faveNumber.remove();
-    numberInput.remove();
     userMessage.remove();
-    userDataForm.remove();
     delAccButton.remove();
     signOutButton.remove();
+    userInputs.forEach(input => input.remove());
 }
 
-console.log(`-----------------------`);
-console.log(`Users`, users);
-console.log(`-----------------------`);
-users.forEach(usr => console.log(usr));
-console.log(`-----------------------`);
+// Dark Mode
+if (darkMode == true) {
+    document.body.classList.add(`darkMode`);
+    localStorage.setItem(`Dark Mode`, true);
+    darkModeToggleButton.innerHTML = `Light Mode`;
+} else if (darkMode == false) {
+    document.body.classList.remove(`darkMode`);
+    localStorage.setItem(`Dark Mode`, false);
+    darkModeToggleButton.innerHTML = `Dark Mode`;
+}
 
-function darkModeToggle() {
-    if (darkMode == true) {
-        document.body.classList.add(`darkMode`);
+darkModeToggleButton.addEventListener(`click`, event => {
+    document.body.classList.toggle(`darkMode`);
+    if (document.body.classList.contains(`darkMode`)) {
         localStorage.setItem(`Dark Mode`, true);
         darkModeToggleButton.innerHTML = `Light Mode`;
-    } else if (darkMode == false) {
-        document.body.classList.remove(`darkMode`);
+    } else {
         localStorage.setItem(`Dark Mode`, false);
         darkModeToggleButton.innerHTML = `Dark Mode`;
     }
-    
-    darkModeToggleButton.addEventListener(`click`, event => {
-        document.body.classList.toggle(`darkMode`);
-        if (document.body.classList.contains(`darkMode`)) {
-            localStorage.setItem(`Dark Mode`, true);
-            darkModeToggleButton.innerHTML = `Light Mode`;
-        } else {
-            localStorage.setItem(`Dark Mode`, false);
-            darkModeToggleButton.innerHTML = `Dark Mode`;
-        }
-    });
-}
+});
 
+// Registration
 signUpButton.addEventListener(`click`, event => {
-
     let newUser = {
         id: users.length + 1,
         email: emailInput.value,
         password: passwordInput.value,
-        number: numberInput.value || 0,
     };
-
     if (users.map(usr => usr.email).includes(emailInput.value)) {
         console.log(`Existing User`);
         userMessage.innerHTML = `Existing User, Please Sign In`;
@@ -87,15 +79,10 @@ signUpButton.addEventListener(`click`, event => {
 });
 
 signOutButton.addEventListener(`click`, event => {
-    let userDataInputs = userDataForm.querySelectorAll(`input[type="text"]`);
-    let userWithData = {
-        ...user,
-        number: numberInput.value,
-    }
-    Object.assign(userWithData, ...([...userDataInputs].map(input => {
+    Object.assign(user, ...([...userInputs].map(input => {
         return {[input.id]: input.value}
     })));
-    users.splice(users.indexOf(users.filter(usr => usr.id == user.id)[0]), 1, userWithData);
+    users.splice(users.indexOf(users.filter(usr => usr.id == user.id)[0]), 1, user);
     localStorage.setItem(`Users`, JSON.stringify(users));
     localStorage.removeItem(`User`);
     window.location.reload();
@@ -125,22 +112,3 @@ delAccButton.addEventListener(`click`, event => {
    localStorage.removeItem(`User`);
    window.location.reload();
 });
-
-userDataForm.addEventListener(`change`, event => {
-    event.preventDefault();
-    let userDataInputs = userDataForm.querySelectorAll(`input[type="text"]`);
-    let userWithData = {
-        ...user,
-        number: numberInput.value,
-    }
-    Object.assign(userWithData, ...([...userDataInputs].map(input => {
-        return {[input.id]: input.value}
-    })));
-    users.splice(users.indexOf(users.filter(usr => usr.id == user.id)[0]), 1, userWithData);
-    localStorage.setItem(`User`, JSON.stringify(userWithData));
-    localStorage.setItem(`Users`, JSON.stringify(users));
-    console.log(`users`, users);
-    console.log(`userWithData`, userWithData);
-});
-
-darkModeToggle();
