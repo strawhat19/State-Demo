@@ -1,0 +1,351 @@
+// Color Picker
+
+.selectedColor {
+    color: white;
+}
+
+.sumitLogo path {
+    fill: default;
+    animation: textAnimate 5s ease-in-out infinite alternate;
+        stroke-linecap: round;
+      stroke-linejoin: round;
+  }
+  
+  .animateOnce path {
+    fill: default;
+    animation: textAnimate 5s ease-in-out;
+  }
+  
+  @keyframes textAnimate {
+    0% {
+      fill-opacity: 0;
+      stroke: white;
+      stroke-width: 0px;
+      stroke-dasharray: 0 50%;
+          stroke-dashoffset: 20%;
+    }
+    35% {
+      stroke: white;
+      stroke-dasharray: 50% 0; 
+      stroke-width: 5px;
+    }
+    75% {
+      stroke-dasharray: 0 50%;
+        stroke-width: 0px;
+    }
+    100% {
+      fill-opacity: default;
+      stroke-dasharray: 0 50%;
+          stroke-dashoffset: -20%;
+    }
+  }
+  
+  .svg-Container {
+      display: flex;
+      flex-direction: column;
+  }
+  
+  // Color Picker
+  
+  $color-ui-panel: #1F232A;
+  $color-ui-panel-dark: #15191C;
+  $color-ui-panel-light: #2A3137;
+  $color-ui-border: #364347;
+  $color-input-bg: #15191C;
+  $color-swatch-border: #fff;
+  $color-text: #8B949A;
+  $spacer: 10px;
+  $map-height: 200px;
+  $input-height:40px;
+  $swatch-width:32px;
+  $swatch-space: 4px;
+  $swatches-width: (6*$swatch-width) + (5*$swatch-space);
+  $map-width: $swatches-width;
+  $eyedropper-width: $swatch-width*2 + $swatch-space;
+  $window-width:$swatches-width + $eyedropper-width + $spacer*3;
+  $spectrum-cursor-width: 30px;
+  
+  body{
+       background: #9b9dad;
+      font-family: "Proxima Nova", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+      color: #8B949A;
+      letter-spacing: 0.05em;
+      transition: 0.3s ease-in-out;
+    grid-gap: 3em;
+  }
+  
+  .panel-row.colorPicker {
+      order: 2;
+  }
+  
+  .color-picker-panel{
+          background: rgba(0, 0, 0, 40%);
+      width: 310px;
+      border-radius: 8px;
+      border: 2px solid #364347;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+  }
+  
+  .panel-row{
+    position:relative;
+    margin:0 10px 10px;
+    &:first-child{
+      margin-top:10px;
+      margin-bottom: $spacer - $swatch-space;
+    }
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+  .panel-row:nth-child(4) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &::after {
+      display: none;
+    }
+    #user-swatches {
+      display: none;
+    }
+  }
+  .panel-header{
+    // display: none;
+    color: white;
+    background:$color-ui-panel-dark;
+    padding: 8px;
+    width: 100%;
+    border-radius: 8px;
+    margin:0 auto $spacer;
+    text-align:center;
+    text-align: center;
+  }
+  
+  .add-swatch {
+    display: none !important;
+  }
+  
+  .swatch{
+    display:inline-block;
+    width:$swatch-width;
+    height:$swatch-width;
+    background:#ccc;
+    border-radius:4px;
+    margin-left:4px;
+    margin-bottom:4px;
+    box-sizing:border-box;
+    border:2px solid $color-ui-border;
+    cursor:pointer;
+  }
+  
+  .panel-row {
+        position: relative;
+      margin: 0 10px 10px;
+      display: flex;
+      justify-content: center;
+      grid-gap: 4em;
+      align-items: center;
+    .spectrum-map {
+      border-radius: 8px;
+    }
+  }
+  
+  .panel-row:nth-child(3) {
+     display: none;
+  }
+  
+  .eyedropper {
+    display: none !important;
+  }
+  
+  .default-swatches{
+    display: none;
+    width:$swatches-width;
+    .swatch:nth-child(6n + 1){
+      margin-left:0;
+    }
+  }
+  
+  .color-cursor{
+    border-radius:100%;
+    background:#ccc;
+    box-sizing:border-box;
+    position:absolute;
+    pointer-events:none;
+    z-index:2;
+    border:2px solid $color-swatch-border;
+    transition: all .2s ease;
+    
+    &.dragging{
+      transition:none;
+    }
+    
+    &#spectrum-cursor{
+      width:$spectrum-cursor-width;
+      height:$spectrum-cursor-width;
+      margin-left:- $spectrum-cursor-width/2;
+      margin-top:- $spectrum-cursor-width/2;
+      top:0;
+      left:0;
+    }
+  
+    &#hue-cursor{
+      top:0;
+      left:50%;
+      height:20px;
+      width:20px;
+      margin-top:-10px;
+      margin-left:-10px;
+      pointer-events:none;
+    }
+  }
+  
+  .spectrum-map{
+    position:relative;
+    width:$map-width;
+    height:$map-height;
+    overflow:hidden;
+  }
+  
+  #spectrum-canvas{
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:#ccc;
+  }
+  
+  .hue-map{
+    position:absolute;
+    top:$spacer/2;
+    bottom:$spacer/2;
+    right:$eyedropper-width/2 - $spacer/2;
+    width:$spacer;
+  }
+  
+  #hue-canvas{
+    border-radius:8px;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#ccc;
+  }
+  
+  .button{
+    background:$color-ui-panel-light;
+    border:0;
+    border-radius:4px;
+    color:$color-text;
+    font-size:1rem;
+    box-shadow:0 2px 4px rgba(0,0,0,.2);
+    outline:none;
+    cursor:pointer;
+    padding:4px;
+    &:active{
+      background:darken($color-ui-panel-light,2%);
+    }
+  
+    &.eyedropper{
+      position:absolute;
+      right:0;
+      top:0;
+      width:$eyedropper-width;
+      height:$eyedropper-width;
+      display:block;
+    }
+  
+    &.add-swatch{
+      display:block;
+      padding:6px;
+      width:200px;
+      margin:10px auto 0;
+    }
+  
+    &.mode-toggle{
+      position:absolute;
+      top:0;
+      right:0;
+      width:$eyedropper-width;
+      height: $input-height;
+    }
+  }
+  
+  .value-fields{
+    display:none;  
+    align-items:center;
+    &.active{
+      display:flex;
+    }
+  
+    .field-label{
+      margin-right:6px;
+    }
+  
+    .field-input{
+      background: $color-input-bg;
+      border: 1px solid $color-ui-border;
+      box-sizing:border-box;
+      border-radius:2px;
+      line-height:$input-height - 2px;
+      padding:0 4px;
+      text-align:center;
+      color: $color-text;
+      font-size:1rem;
+      display:block;
+    }
+  }
+  
+  .rgb-fields{
+    .field-group{
+      display:flex;
+      align-items:center;
+    }
+    .field-input{
+      width:42px;
+      margin-right:$spacer;
+    }
+  }
+  
+  .hex-field{
+    .field-input{
+      width:170px;
+    }
+  }
+  
+  .color-indicator{
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:10px;
+    width:20px;
+    height:20px;
+    border-radius:4px;
+    background:#ccc;
+  }
+  
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  
+  
+  @media (max-width: 1366px) {
+    body {
+      flex-direction: column;
+    }
+  }
