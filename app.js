@@ -1,7 +1,9 @@
+import { globalFunctions } from "./globalFunctions.js";
+
 const userDataForm = document.forms.userData;
 const userHello = document.querySelector(`.userHello`);
 const user = JSON.parse(localStorage.getItem(`User`));
-const users = JSON.parse(localStorage.getItem(`Users`)) || [];
+const users = globalFunctions.removeDuplicateObjectFromArray(JSON.parse(localStorage.getItem(`Users`))) || [];
 const faveNumber = document.querySelector(`.faveNumber`);
 const userMessage = document.querySelector(`.userMessage`);
 const signInButton = document.querySelector(`.signInButton`);
@@ -13,6 +15,7 @@ const darkModeToggleButton = document.querySelector(`.dModeToggle`);
 const passwordInput = document.querySelector(`input[type="password"]`);
 const numberInput = document.querySelector(`input[type="number"]`);
 const darkMode = JSON.parse(localStorage.getItem(`Dark Mode`)) || false;
+const userInputs = userDataForm.querySelectorAll(`input[type="text"]`);
 
 if (user) {
     console.log(user);
@@ -23,6 +26,7 @@ if (user) {
     document.body.classList.add(`activeUser`);
     numberInput.value = user.number || 0;
     userHello.innerHTML = user.email;
+    userInputs.forEach(input => input.value = user[input.id]);
 } else {
     faveNumber.remove();
     numberInput.remove();
@@ -83,7 +87,15 @@ signUpButton.addEventListener(`click`, event => {
 });
 
 signOutButton.addEventListener(`click`, event => {
-    users.splice(users.indexOf(users.filter(usr => usr.id == user.id)[0]), 1, {...user, number: numberInput.value});
+    let userDataInputs = userDataForm.querySelectorAll(`input[type="text"]`);
+    let userWithData = {
+        ...user,
+        number: numberInput.value,
+    }
+    Object.assign(userWithData, ...([...userDataInputs].map(input => {
+        return {[input.id]: input.value}
+    })));
+    users.splice(users.indexOf(users.filter(usr => usr.id == user.id)[0]), 1, userWithData);
     localStorage.setItem(`Users`, JSON.stringify(users));
     localStorage.removeItem(`User`);
     window.location.reload();
@@ -116,21 +128,19 @@ delAccButton.addEventListener(`click`, event => {
 
 userDataForm.addEventListener(`change`, event => {
     event.preventDefault();
-    console.log(event);
-    // console.log(userDataForm);
-    let userFormData = new FormData(userDataForm);
-    console.log(`userFormData`, userFormData);
-    // console.log(event.target.id, event.target.value);
+    let userDataInputs = userDataForm.querySelectorAll(`input[type="text"]`);
     let userWithData = {
         ...user,
-        [event.target.id]: event.target.value,
-    };
-    // console.log(userWithData);
-});
-
-userDataForm.addEventListener(`submit`, event => {
-    event.preventDefault();
-    console.log(`User Data Form Submitted`, event);
+        number: numberInput.value,
+    }
+    Object.assign(userWithData, ...([...userDataInputs].map(input => {
+        return {[input.id]: input.value}
+    })));
+    users.splice(users.indexOf(users.filter(usr => usr.id == user.id)[0]), 1, userWithData);
+    localStorage.setItem(`User`, JSON.stringify(userWithData));
+    localStorage.setItem(`Users`, JSON.stringify(users));
+    console.log(`users`, users);
+    console.log(`userWithData`, userWithData);
 });
 
 darkModeToggle();

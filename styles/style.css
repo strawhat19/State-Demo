@@ -55,6 +55,11 @@ form {
       -ms-flex-direction: column;
           flex-direction: column;
   grid-gap: 5px;
+  padding: 1em;
+}
+
+form input[type="text"] {
+  padding: 0.5em;
 }
 
 .darkMode {

@@ -36,6 +36,10 @@ form {
     display: flex;
     flex-direction: column;
     grid-gap: 5px;
+    padding: 1em;
+    input[type="text"] {
+        padding: 0.5em;
+    }
 }
 
 .darkMode {
