@@ -5,6 +5,7 @@ const user = JSON.parse(localStorage.getItem(`User`));
 const users = globalFunctions.removeDuplicateObjectFromArray(JSON.parse(localStorage.getItem(`Users`))) || [];
 const faveNumber = document.querySelector(`.faveNumber`);
 const userMessage = document.querySelector(`.userMessage`);
+const userDataForm = document.querySelector(`#userData`);
 const signInButton = document.querySelector(`.signInButton`);
 const signOutButton = document.querySelector(`.signOutButton`);
 const slidingBanner = document.querySelector(`.slidingBanner`);
@@ -41,6 +42,7 @@ if (user) {
     userMessage.remove();
     delAccButton.remove();
     signOutButton.remove();
+    userDataForm.remove();
     userInputs.forEach(input => input.remove());
     console.log(`Users`, users);
 }

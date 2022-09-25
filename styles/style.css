@@ -28,7 +28,12 @@ body {
   color: white;
 }
 
-.darkMode .userMessage, .darkMode .faveNumber, .darkMode .slidingBanner {
+.darkMode .userMessage, .darkMode .faveNumber, .darkMode .slidingBanner, .darkMode form {
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+.darkMode .userMessage input, .darkMode .faveNumber input, .darkMode .slidingBanner input, .darkMode form input {
   -webkit-filter: invert(1);
           filter: invert(1);
 }

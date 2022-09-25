@@ -19,8 +19,11 @@ body {
     filter: invert(1);
     background: black;
     color: white;
-    .userMessage, .faveNumber, .slidingBanner {
+    .userMessage, .faveNumber, .slidingBanner, form {
         filter: invert(1);
+        input {
+            filter: invert(1);
+        }
     }
 }
 
