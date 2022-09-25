@@ -17,13 +17,13 @@ const darkMode = JSON.parse(localStorage.getItem(`Dark Mode`)) || false;
 const userInputs = document.querySelectorAll(`.userInput`);
 
 // User Initiation
-console.log(`Users`, users);
 if (!users.length) {
     signInButton.remove();
 } else {
     users.forEach(usr => {
-        slidingBanner.innerHTML = `${slidingBanner.innerHTML} --------------------------- ${usr.username ? usr.username : usr.email}'s Favorite Number: ${usr.number}`;
-    })
+        slidingBanner.innerHTML = `${slidingBanner.innerHTML} ----- ${usr.username ? usr.username : usr.email}, the ${usr.bio}, is ${usr.status}.`;
+        slidingBanner.title = `${slidingBanner.title} ----- ${usr.username ? usr.username : usr.email}'s Favorite Number: ${usr.number}`;
+    });
 };
 
 if (user) {
@@ -35,13 +35,14 @@ if (user) {
     userHello.innerHTML = user.email;
     document.body.classList.add(`activeUser`);
     userInputs.forEach(input => input.value = user[input.id] || ``);
-    if (user[`username`]) userHello.innerHTML = user[`username`];
+    if (user.username) userHello.innerHTML = user.username;
 } else {
     faveNumber.remove();
     userMessage.remove();
     delAccButton.remove();
     signOutButton.remove();
     userInputs.forEach(input => input.remove());
+    console.log(`Users`, users);
 }
 
 // Dark Mode
@@ -72,7 +73,7 @@ function updateUser(logUser) {
     })));
     users.splice(users.indexOf(users.filter(usr => usr.id == user.id)[0]), 1, user);
     if (logUser) console.log(`Updated User`, user);
-    if (user[`username`]) userHello.innerHTML = user[`username`];
+    if (user.username) userHello.innerHTML = user.username;
     localStorage.setItem(`User`, JSON.stringify(user));
     localStorage.setItem(`Users`, JSON.stringify(users));
 }
@@ -97,7 +98,7 @@ signUpButton.addEventListener(`click`, event => {
 });
 
 signOutButton.addEventListener(`click`, event => {
-    updateUser();
+    updateUser(true);
     localStorage.removeItem(`User`);
     window.location.reload();
 });
@@ -129,6 +130,6 @@ delAccButton.addEventListener(`click`, event => {
 
 userInputs.forEach(input => {
     input.addEventListener(`input`, event => {
-        updateUser();
+        updateUser(true);
     })
 })
