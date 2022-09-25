@@ -66,6 +66,17 @@ darkModeToggleButton.addEventListener(`click`, event => {
     }
 });
 
+function updateUser(logUser) {
+    Object.assign(user, ...([...userInputs].map(input => {
+        return {[input.id]: input.value}
+    })));
+    users.splice(users.indexOf(users.filter(usr => usr.id == user.id)[0]), 1, user);
+    if (logUser) console.log(`Updated User`, user);
+    if (user[`username`]) userHello.innerHTML = user[`username`];
+    localStorage.setItem(`User`, JSON.stringify(user));
+    localStorage.setItem(`Users`, JSON.stringify(users));
+}
+
 // Registration
 signUpButton.addEventListener(`click`, event => {
     let newUser = {
@@ -86,11 +97,7 @@ signUpButton.addEventListener(`click`, event => {
 });
 
 signOutButton.addEventListener(`click`, event => {
-    Object.assign(user, ...([...userInputs].map(input => {
-        return {[input.id]: input.value}
-    })));
-    users.splice(users.indexOf(users.filter(usr => usr.id == user.id)[0]), 1, user);
-    localStorage.setItem(`Users`, JSON.stringify(users));
+    updateUser();
     localStorage.removeItem(`User`);
     window.location.reload();
 });
@@ -119,3 +126,9 @@ delAccButton.addEventListener(`click`, event => {
    localStorage.removeItem(`User`);
    window.location.reload();
 });
+
+userInputs.forEach(input => {
+    input.addEventListener(`input`, event => {
+        updateUser();
+    })
+})
