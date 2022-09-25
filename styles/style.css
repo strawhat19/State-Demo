@@ -28,12 +28,12 @@ body {
   color: white;
 }
 
-.darkMode .userMessage, .darkMode .faveNumber, .darkMode .slidingBanner, .darkMode form {
+.darkMode .userMessage, .darkMode .faveNumber, .darkMode .slidingBanner, .darkMode .userData {
   -webkit-filter: invert(1);
           filter: invert(1);
 }
 
-.darkMode .userMessage input, .darkMode .faveNumber input, .darkMode .slidingBanner input, .darkMode form input {
+.darkMode .userMessage input, .darkMode .faveNumber input, .darkMode .slidingBanner input, .darkMode .userData input {
   -webkit-filter: invert(1);
           filter: invert(1);
 }
