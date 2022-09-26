@@ -30,6 +30,8 @@ var green = document.getElementById('green');
 var hex = document.getElementById('hex'); 
 
 const favoriteColorElement = document.querySelector(`.favoriteColor`);
+const favoriteColorText = document.querySelector(`.favoriteColorText`);
+favoriteColorText.innerHTML = user.favoriteColor;
 
 function ColorPicker(){
   this.addDefaultSwatches();
@@ -58,7 +60,7 @@ function createSwatch(target, color){
   swatch.setAttribute('title', color);
   swatch.style.backgroundColor = color;
   swatch.addEventListener('click', function(){
-    var color = tinycolor(this.style.backgroundColor);     
+    var color = tinycolor(this.style.backgroundColor);
     colorToPos(color);
     setColorValues(color);
   });
@@ -152,13 +154,14 @@ function setColorValues(color){
   blue.value = rgbValues.b;
   hex.value = hexValue;
   favoriteColorElement.value = `#` + hexValue;
+  favoriteColorText.innerHTML = `#` + hexValue;
 };
 
 function setCurrentColor(color){
   color = tinycolor(color);
   currentColor = color;
   colorIndicator.style.backgroundColor = color;
-  document.body.style.backgroundColor = color; 
+  // document.body.style.backgroundColor = color; 
   spectrumCursor.style.backgroundColor = color; 
   hueCursor.style.backgroundColor = 'hsl('+ color.toHsl().h +', 100%, 50%)';
 };

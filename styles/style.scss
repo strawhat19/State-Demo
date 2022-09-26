@@ -1,3 +1,6 @@
+/* Montserrat  */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 *,*::before,*::after {
     margin: 0;
     padding: 0;
@@ -9,8 +12,10 @@
 }
 
 body {
+    height: 95vh;
     display: flex;
     overflow-x: hidden;
+    font-family: 'Montserrat';
     position: relative;
     flex-direction: column;
 }
@@ -19,12 +24,22 @@ body {
     filter: invert(1);
     background: black;
     color: white;
-    .userMessage, .faveNumber, .slidingBanner, .userData {
+    .userMessage, .faveNumber, .slidingBanner, .userData, button {
         filter: invert(1);
-        input {
+        input:not(#favoriteColor) {
             filter: invert(1);
         }
     }
+}
+
+.faveColor {
+  padding: 5px;
+  display: flex;
+  grid-gap: 15px;
+  align-items: center;
+  margin-bottom: -60px;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .darkModeToggle {
@@ -51,7 +66,8 @@ section {
 }
 
 .slidingBanner {
-    bottom: 0px;
+  bottom: 15px;
+  position: fixed;
 }
 
 form {
@@ -62,6 +78,11 @@ form {
     input[type="text"] {
         padding: 0.5em;
     }
+}
+
+#userData {
+  transform: scale(0.8);
+  margin-top: -45px;
 }
 
 .buttonContainer {
@@ -162,8 +183,6 @@ input[type="number"]::-webkit-inner-spin-button {
   }
   
   body {
-    background: #9b9dad;
-    font-family: "Proxima Nova", sans-serif;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -173,8 +192,6 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    height: 90vh;
-    color: #8B949A;
     letter-spacing: 0.05em;
     -webkit-transition: 0.3s ease-in-out;
     transition: 0.3s ease-in-out;
@@ -188,6 +205,7 @@ input[type="number"]::-webkit-inner-spin-button {
   }
   
   .color-picker-panel {
+    transform: scale(0.9);
     background: black;
     width: 310px;
     border-radius: 8px;

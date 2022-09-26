@@ -29,12 +29,16 @@
         </form>
 
        <form id="userData" class="userData" title="User Data form" method="GET">
-        Username: <input id="username" name="username" class="username userInput" title="Username" type="text" placeholder="Username" required>
-        The <input id="bio" name="bio" class="bio userInput" title="Biography" type="text" placeholder="Bio" required>
-        Is <input id="status" name="status" class="status userInput" title="Status" type="text" placeholder="Status" required>
+        <div class="formInputsCont">
+          Username: <input id="username" name="username" class="username userInput" title="Username" type="text" placeholder="Username" required>
+          The <input id="bio" name="bio" class="bio userInput" title="Biography" type="text" placeholder="Bio" required>
+          Is <input id="status" name="status" class="status userInput" title="Status" type="text" placeholder="Status" required>
+        </div>
 
         <div class="faveColor">
-            And Their Favorite Color is <input id="favoriteColor" name="favoriteColor" class="favoriteColor userInput" title="Favorite Color" type="color"  placeholder="Favorite Color" required>
+            <div class="faveColorIs">
+              And Their Favorite Color is <input id="favoriteColor" name="favoriteColor" class="favoriteColor userInput" title="Favorite Color" type="color"  placeholder="Favorite Color" required> <span class="favoriteColorText"></span>
+            </div>
             <div id="colorPicker" class="colorPickerElement" title="Color Picker">
                 <div class="color-picker-panel">
                   <div class="panel-row">
@@ -73,7 +77,7 @@
                     <button id="mode-toggle" class="button mode-toggle">Mode</button>
                   </div>
                   <div class="panel-row rowHeader">
-                    <h2 class="panel-header">Change Background</h2>
+                    <h2 class="panel-header">Favorite Color</h2>
                     <div id="user-swatches" class="swatches custom-swatches">
                     </div>
                     <button id="add-swatch" class="button add-swatch">
