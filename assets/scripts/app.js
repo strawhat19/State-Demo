@@ -11,6 +11,7 @@ const signOutButton = document.querySelector(`.signOutButton`);
 const slidingBanner = document.querySelector(`.slidingBanner`);
 const signUpButton = document.querySelector(`.signUpButton`);
 const delAccButton = document.querySelector(`.delAccButton`);
+const faveColor = document.querySelector(`.faveColor`);
 const emailInput = document.querySelector(`input[type="email"]`);
 const darkModeToggleButton = document.querySelector(`.dModeToggle`);
 const passwordInput = document.querySelector(`input[type="password"]`);
@@ -24,6 +25,7 @@ if (user) {
     signInButton.remove();
     signUpButton.remove();
     passwordInput.remove();
+    faveColor.style.display = `none`;
     userHello.innerHTML = user.email;
     document.body.classList.add(`activeUser`);
     userInputs.forEach(input => input.value = user[input.id] || ``);

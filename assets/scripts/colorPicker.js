@@ -1,4 +1,6 @@
-var addSwatch = document.getElementById('add-swatch');
+const user = JSON.parse(localStorage.getItem(`User`));
+if (user) {
+  var addSwatch = document.getElementById('add-swatch');
 var modeToggle = document.getElementById('mode-toggle');
 var swatches = document.getElementsByClassName('default-swatches')[0];
 var colorIndicator = document.getElementById('color-indicator');
@@ -26,6 +28,8 @@ var red = document.getElementById('red');
 var blue = document.getElementById('blue');
 var green = document.getElementById('green');
 var hex = document.getElementById('hex'); 
+
+const favoriteColorElement = document.querySelector(`.favoriteColor`);
 
 function ColorPicker(){
   this.addDefaultSwatches();
@@ -96,9 +100,6 @@ function createShadeSpectrum(color) {
 
   canvas.addEventListener('mousedown', function(e){
     startGetSpectrumColor(e);
-    const selectedColorElement = document.querySelector(`.selectedColor`);
-    const selectedColor = document.body.style.backgroundColor;
-    selectedColorElement.innerHTML = selectedColor;
   });
 };
 
@@ -150,6 +151,7 @@ function setColorValues(color){
   green.value = rgbValues.g;
   blue.value = rgbValues.b;
   hex.value = hexValue;
+  favoriteColorElement.value = `#` + hexValue;
 };
 
 function setCurrentColor(color){
@@ -265,3 +267,4 @@ window.addEventListener('resize', function(){
 });
 
 new ColorPicker();
+}
