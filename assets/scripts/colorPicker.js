@@ -162,7 +162,7 @@ function setCurrentColor(color){
   color = tinycolor(color);
   currentColor = color;
   colorIndicator.style.backgroundColor = color;
-  // document.body.style.backgroundColor = color; 
+  document.querySelector(`.faveColor`).style.borderColor = color; 
   spectrumCursor.style.backgroundColor = color; 
   hueCursor.style.backgroundColor = 'hsl('+ color.toHsl().h +', 100%, 50%)';
 };
