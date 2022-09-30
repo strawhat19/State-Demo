@@ -271,4 +271,6 @@ window.addEventListener('resize', function(){
 });
 
 new ColorPicker();
+setCurrentColor(`${user.favoriteColor}`);
+colorToPos(`${user.favoriteColor}`);
 }
