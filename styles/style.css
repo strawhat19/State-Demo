@@ -42,6 +42,11 @@ body {
           filter: invert(1);
 }
 
+.darkMode .color-cursor {
+  -webkit-filter: invert(0) !important;
+          filter: invert(0) !important;
+}
+
 .faveColor {
   padding: 5px;
   display: -webkit-box;

@@ -30,6 +30,10 @@ body {
             filter: invert(1);
         }
     }
+
+    .color-cursor {
+      filter: invert(0) !important;
+    }
 }
 
 .faveColor {

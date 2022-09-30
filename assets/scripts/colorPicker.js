@@ -1,6 +1,6 @@
 const user = JSON.parse(localStorage.getItem(`User`));
 if (user) {
-  var addSwatch = document.getElementById('add-swatch');
+var addSwatch = document.getElementById('add-swatch');
 var modeToggle = document.getElementById('mode-toggle');
 var swatches = document.getElementsByClassName('default-swatches')[0];
 var colorIndicator = document.getElementById('color-indicator');
@@ -40,6 +40,7 @@ function ColorPicker(){
 };
 
 ColorPicker.prototype.defaultSwatches = [
+  `${user.favoriteColor}`,
   '#FFFFFF', 
   '#FFFB0D', 
   '#0532FF', 
