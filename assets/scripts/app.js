@@ -1,7 +1,7 @@
 import { globalFunctions } from "./globalFunctions.js";
 
 const userHello = document.querySelector(`.userHello`);
-const user = JSON.parse(localStorage.getItem(`User`));
+let user = JSON.parse(localStorage.getItem(`User`));
 const users = globalFunctions.removeDuplicateObjectFromArray(JSON.parse(localStorage.getItem(`Users`))) || [];
 const faveNumber = document.querySelector(`.faveNumber`);
 const userMessage = document.querySelector(`.userMessage`);
@@ -85,11 +85,39 @@ function updateUser(logUser) {
 
 // Registration
 signUpButton.addEventListener(`click`, event => {
+
+    let date = new Date();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? `PM` : `AM`;
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? `0`+minutes : minutes;
+
+    let formattedTime = [hours, minutes].join(`_`) + `_` + ampm;
+    let formattedDate = [
+        date.getMonth() + 1,
+        date.getDate(),
+        date.getFullYear()
+    ].join(`_`);
+
+    let randomString = Math.random().toString(36).substr(2, 9);
+    if (users.length > 1) {
+        let idChars = users.map(usr => usr.id.split(`_`).pop());
+        while (idChars.includes(randomString)) {
+            randomString = Math.random().toString(36).substr(2, 9);
+        }
+    }
+
+    let uniqueID = `user_${users.length + 1}_${formattedTime}_${formattedDate}_${randomString}`;
+
     let newUser = {
-        id: users.length + 1,
+        id: uniqueID,
         email: emailInput.value,
+        favoriteColor: `#000000`,
         password: passwordInput.value,
     };
+
     if (users.map(usr => usr.email).includes(emailInput.value)) {
         console.log(`Existing User`);
         userMessage.innerHTML = `Existing User, Please Sign In`;
@@ -128,9 +156,10 @@ signInButton.addEventListener(`click`, event => {
 });
 
 delAccButton.addEventListener(`click`, event => {
-   localStorage.setItem(`Users`, JSON.stringify(users.filter(usr => usr.email != user.email)));
-   localStorage.removeItem(`User`);
-   window.location.reload();
+    localStorage.removeItem(`User`);
+    localStorage.setItem(`Users`, JSON.stringify(users.filter(usr => usr.email != user.email)));
+    user = null;
+    window.location.reload();
 });
 
 userInputs.forEach(input => {
