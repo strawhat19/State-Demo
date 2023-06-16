@@ -3,6 +3,7 @@ import { globalFunctions } from "./globalFunctions.js";
 const userHello = document.querySelector(`.userHello`);
 let user = JSON.parse(localStorage.getItem(`User`));
 const users = globalFunctions.removeDuplicateObjectFromArray(JSON.parse(localStorage.getItem(`Users`))) || [];
+const emails = globalFunctions.removeDuplicateObjectFromArray(JSON.parse(localStorage.getItem(`Emails`))) || [];
 const faveNumber = document.querySelector(`.faveNumber`);
 const userMessage = document.querySelector(`.userMessage`);
 const userDataForm = document.querySelector(`#userData`);
@@ -11,8 +12,6 @@ const signOutButton = document.querySelector(`.signOutButton`);
 const slidingBanner = document.querySelector(`.slidingBanner`);
 const signUpButton = document.querySelector(`.signUpButton`);
 const delAccButton = document.querySelector(`.delAccButton`);
-const faveColor = document.querySelector(`.faveColor`);
-const faveColorText = document.querySelector(`.faveColorText`);
 const emailInput = document.querySelector(`input[type="email"]`);
 const darkModeToggleButton = document.querySelector(`.dModeToggle`);
 const passwordInput = document.querySelector(`input[type="password"]`);
@@ -86,6 +85,9 @@ function updateUser(logUser) {
 // Registration
 signUpButton.addEventListener(`click`, event => {
 
+    // Get the current new Date() and reference that
+    // If we use new Date() over and over again it will be milliseconds apart
+    // Better to call new Date() once and set it to the date variable to reference
     let date = new Date();
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -94,22 +96,29 @@ signUpButton.addEventListener(`click`, event => {
     hours = hours ? hours : 12;
     minutes = minutes < 10 ? `0`+minutes : minutes;
 
-    let formattedTime = [hours, minutes].join(`_`) + `_` + ampm;
-    let formattedDate = [
+    // Format Date & Time Created
+    let timeCreated = [hours, minutes].join(`_`) + `_` + ampm;
+    let dateCreated = [
         date.getMonth() + 1,
         date.getDate(),
         date.getFullYear()
     ].join(`_`);
 
+    // Generate random characters
     let randomString = Math.random().toString(36).substr(2, 9);
+
+    // Verify it is unique by checking the random characters of other users
     if (users.length > 1) {
-        let idChars = users.map(usr => usr.id.split(`_`).pop());
-        while (idChars.includes(randomString)) {
+        // Get the current existing user accounts, extract their ID's and then pop() to get the characters after the last `_`
+        let idCharsFromOtherUsers = users.map(usr => usr.id.split(`_`).pop());
+        // If the Random Characters have been used by a different user before, regenerate a new random string
+        while (idCharsFromOtherUsers.includes(randomString)) {
             randomString = Math.random().toString(36).substr(2, 9);
         }
     }
 
-    let uniqueID = `user_${users.length + 1}_${formattedTime}_${formattedDate}_${randomString}`;
+    // Combine all the Account Creation Parameters to make a New Unique ID
+    let uniqueID = `user_${emails.length + 1}_${timeCreated}_${dateCreated}_${randomString}`;
 
     let newUser = {
         id: uniqueID,
@@ -124,8 +133,10 @@ signUpButton.addEventListener(`click`, event => {
         document.querySelector(`section`).prepend(userMessage);
     } else {
         users.push(newUser);
+        emails.push(newUser.email);
         localStorage.setItem(`User`, JSON.stringify(newUser));
         localStorage.setItem(`Users`, JSON.stringify(users));
+        localStorage.setItem(`Emails`, JSON.stringify(emails));
         window.location.reload();
     };
 });
