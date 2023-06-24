@@ -3,8 +3,7 @@
 *, *::before, *::after {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :root {
@@ -13,59 +12,39 @@
 
 body {
   height: 95vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   overflow-x: hidden;
   position: relative;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  font-family: 'Montserrat';
+  flex-direction: column;
+  font-family: "Montserrat";
 }
 
 .darkMode {
-  -webkit-filter: invert(1);
-          filter: invert(1);
+  filter: invert(1);
   background: black;
   color: white;
 }
-
 .darkMode .userMessage, .darkMode .faveNumber, .darkMode .slidingBanner, .darkMode .userData, .darkMode button {
-  -webkit-filter: invert(1);
-          filter: invert(1);
+  filter: invert(1);
 }
-
 .darkMode .userMessage input:not(#favoriteColor), .darkMode .faveNumber input:not(#favoriteColor), .darkMode .slidingBanner input:not(#favoriteColor), .darkMode .userData input:not(#favoriteColor), .darkMode button input:not(#favoriteColor) {
-  -webkit-filter: invert(1);
-          filter: invert(1);
+  filter: invert(1);
 }
-
 .darkMode .color-cursor {
-  -webkit-filter: invert(0) !important;
-          filter: invert(0) !important;
+  filter: invert(0) !important;
 }
 
 .faveColor {
   padding: 5px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   grid-gap: 15px;
   margin-top: 10px;
   border: 10px solid;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  border-radius: 4px;
+  align-items: center;
   margin-bottom: -60px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .darkModeToggle {
@@ -75,7 +54,6 @@ body {
   right: 15px;
   z-index: 1;
 }
-
 .darkModeToggle button {
   padding: 5px;
 }
@@ -83,23 +61,13 @@ body {
 section {
   width: 100%;
   height: 70vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   grid-gap: 10px;
   text-align: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  transform: scale(1.5);
+  flex-direction: column;
+  justify-content: center;
 }
 
 .slidingBanner {
@@ -108,57 +76,41 @@ section {
 }
 
 form {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   grid-gap: 5px;
   padding: 1em;
 }
-
-form input[type="text"] {
+form input[type=text] {
   padding: 0.5em;
 }
 
 #userData {
-  -webkit-transform: scale(0.8);
-          transform: scale(0.8);
+  transform: scale(0.8);
   margin-top: -45px;
 }
 
 .buttonContainer {
   width: 20%;
   grid-gap: 5px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .activeUser .buttonContainer {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 
 .registrationButton {
   width: 100%;
 }
 
-input[type="number"] {
+input[type=number] {
   width: 50px;
 }
 
-input[type="number"]::-webkit-inner-spin-button {
+input[type=number]::-webkit-inner-spin-button {
   opacity: 1;
 }
 
@@ -203,7 +155,6 @@ input[type="number"]::-webkit-inner-spin-button {
     stroke-dashoffset: -20%;
   }
 }
-
 @keyframes textAnimate {
   0% {
     fill-opacity: 0;
@@ -227,54 +178,32 @@ input[type="number"]::-webkit-inner-spin-button {
     stroke-dashoffset: -20%;
   }
 }
-
 .svg-Container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
 body {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   letter-spacing: 0.05em;
-  -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   grid-gap: 3em;
 }
 
 .panel-row.colorPicker {
-  -webkit-box-ordinal-group: 3;
-  -ms-flex-order: 2;
   order: 2;
 }
 
 .color-picker-panel {
-  -webkit-transform: scale(0.9);
-          transform: scale(0.9);
+  transform: scale(0.9);
   background: black;
   width: 310px;
   border-radius: 8px;
   border: 2px solid #364347;
-  -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
@@ -295,14 +224,8 @@ body {
 }
 
 .panel-row:nth-child(4) {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -337,7 +260,6 @@ body {
   border-radius: 4px;
   margin-left: 4px;
   margin-bottom: 4px;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border: 2px solid #364347;
   cursor: pointer;
@@ -346,15 +268,9 @@ body {
 .panel-row {
   position: relative;
   margin: 0 10px 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   grid-gap: 4em;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -375,25 +291,22 @@ body {
   width: 212px;
 }
 
-.default-swatches .swatch:nth-child(6n + 1) {
+.default-swatches .swatch:nth-child(6n+1) {
   margin-left: 0;
 }
 
 .color-cursor {
   border-radius: 100%;
   background: #ccc;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   position: absolute;
   pointer-events: none;
   z-index: 2;
   border: 2px solid #fff;
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 }
 
 .color-cursor.dragging {
-  -webkit-transition: none;
   transition: none;
 }
 
@@ -460,7 +373,6 @@ body {
   border-radius: 4px;
   color: #8B949A;
   font-size: 1rem;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   outline: none;
   cursor: pointer;
@@ -497,14 +409,10 @@ body {
 
 .value-fields {
   display: none;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
 .value-fields.active {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -515,7 +423,6 @@ body {
 .value-fields .field-input {
   background: #15191C;
   border: 1px solid #364347;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border-radius: 2px;
   line-height: 38px;
@@ -527,11 +434,7 @@ body {
 }
 
 .rgb-fields .field-group {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -564,10 +467,7 @@ input::-webkit-inner-spin-button {
 
 @media (max-width: 1366px) {
   body {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
   }
 }
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=colorPicker.css.map *//*# sourceMappingURL=style.css.map */

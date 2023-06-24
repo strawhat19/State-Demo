@@ -11,8 +11,6 @@ const signOutButton = document.querySelector(`.signOutButton`);
 const slidingBanner = document.querySelector(`.slidingBanner`);
 const signUpButton = document.querySelector(`.signUpButton`);
 const delAccButton = document.querySelector(`.delAccButton`);
-const faveColor = document.querySelector(`.faveColor`);
-const faveColorText = document.querySelector(`.faveColorText`);
 const emailInput = document.querySelector(`input[type="email"]`);
 const darkModeToggleButton = document.querySelector(`.dModeToggle`);
 const passwordInput = document.querySelector(`input[type="password"]`);
